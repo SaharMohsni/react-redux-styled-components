@@ -8,8 +8,8 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
-    "history": "^5.2.0",
     "connected-react-router": "^6.9.2",
+    "history": "^5.2.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -19,6 +19,7 @@
     "redux-injectors": "^1.3.0",
     "redux-saga": "^1.1.3",
     "sass": "^1.49.7",
+    "styled-components": "^5.3.5",
     "typesafe-actions": "^5.1.0",
     "web-vitals": "^2.1.4"
   },
