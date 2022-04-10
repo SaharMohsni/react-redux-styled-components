@@ -24,6 +24,10 @@ import {
 
 const CocktailOwnerForm = () => {
   const [inputs, setInputs] = React.useState({});
+  console.log(
+    "🚀 ~ file: CocktailOwnerForm.jsx ~ line 27 ~ CocktailOwnerForm ~ inputs",
+    inputs
+  );
 
   // Handle Input change with Field validations
   const handleChange = (event, fieldType = "") => {
@@ -56,7 +60,8 @@ const CocktailOwnerForm = () => {
 
   // email has error
   const emailHasError =
-    hasError("email") || (!hasError("email") && !isValidEmail(inputs["email"]));
+    hasError("email") ||
+    (hasKey(inputs, "email") && !isValidEmail(inputs["email"]));
 
   return (
     <Box
