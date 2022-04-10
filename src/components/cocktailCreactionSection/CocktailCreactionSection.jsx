@@ -5,6 +5,7 @@ import { selectUserData } from "../../features/selectors/coktailBar.selectors";
 import CustomizedSteppers from "../../shared/components/stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";
+import "./cocktailCreactionSection.scss";
 const CocktailCreactionSection = () => {
   const userData = useSelector(selectUserData);
   const [validStep, setValidStep] = React.useState(false);
@@ -29,7 +30,7 @@ const CocktailCreactionSection = () => {
     },
   ];
   return (
-    <div id="cocktailCreactionSection">
+    <div id="cocktailCreactionSection" className="cocktail-creaction-section">
       <SectionContainer>
         <CustomizedSteppers steps={steps} validStep={validStep} />
       </SectionContainer>
