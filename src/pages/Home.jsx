@@ -26,7 +26,6 @@ import { isStringOrArrayEmpty } from "../utils/isEmpty";
 const Home = () => {
   const dispatch = useDispatch();
 
- 
   // Data Selectors
   const userData = useSelector(selectUserData);
   const cocktailFiltersData = useSelector(selectCocktailFiltersData);
@@ -36,9 +35,11 @@ const Home = () => {
   const alcoholicTypesList = useSelector(selectAlcoholicTypesList);
   const filtredCocktailList = useSelector(selectFiltredCocktailList);
 
+  const filtredCocktailListRef = React.useRef(null);
+
   //Local State
   const [filterIsCreated, setfilterIsCreated] = React.useState(false);
-   const [emptyDialogOpen, setEmptyDialogOpen] = React.useState(false);
+  const [emptyDialogOpen, setEmptyDialogOpen] = React.useState(false);
 
   // Fetch APIs
   React.useEffect(() => {
@@ -49,6 +50,7 @@ const Home = () => {
     dispatch(fetchAlcoholicTypes());
   }, []);
 
+  const scrollToElement = () => filtredCocktailListRef.current.scrollIntoView();
   // Set cocktail list after filter
   React.useEffect(() => {
     if (filterIsCreated) {
@@ -58,7 +60,6 @@ const Home = () => {
       setEmptyDialogOpen(true);
     }
   }, [filterIsCreated, cocktailFiltersData]);
-
 
   return (
     <div className="home">
@@ -73,7 +74,10 @@ const Home = () => {
         alcoholicTypesList={alcoholicTypesList}
       />
       {filterIsCreated && !isStringOrArrayEmpty(filtredCocktailList) && (
-        <FiltredCocktailListSection filtredCocktailList={filtredCocktailList} />
+        <FiltredCocktailListSection
+          filtredCocktailList={filtredCocktailList}
+          filtredCocktailListRef={filtredCocktailListRef}
+        />
       )}
       <CustomDialog open={emptyDialogOpen} setOpen={setEmptyDialogOpen} />
       <Footer />
