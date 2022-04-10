@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button } from "../styles/Button.styled";
-import { CardDescription } from "../styles/CardDescription.styled";
-import { IntroductionContainer } from "../styles/introductionContainer.styled";
+import { CardDescription } from "../styles/introductionSection/CardDescription.styled";
+import { IntroductionContainer } from "../styles/introductionSection/IntroductionContainer.styled";
 import { Link as ScrollLink } from "react-scroll";
-import { Title } from "../styles/Title.styled";
-import { WelcomeCard } from "../styles/WelcomeCard.styled";
+import { Title } from "../styles/introductionSection/Title.styled";
+import { WelcomeCard } from "../styles/introductionSection/WelcomeCard.styled";
 import cocktailBarBackground from "../../assets/images/cocktail-bar-background.jpg";
-import "./introductionSection.scss";
+// import "./introductionSection.scss";
 const IntroductionSection = () => {
   return (
     <IntroductionContainer backgroundImage={cocktailBarBackground}>

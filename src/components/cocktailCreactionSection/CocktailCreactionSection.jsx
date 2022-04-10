@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectAlcoholicTypesList,
   selectCategoriesList,
+  selectCocktailFiltersData,
   selectGlassesList,
   selectIngredientsList,
   selectUserData,
@@ -11,7 +12,6 @@ import {
 import CustomizedSteppers from "./stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";
-import "./cocktailCreactionSection.scss";
 import CocktailDetails from "./cocktailDetais/CocktailDetails";
 import {
   fetchAlcoholicTypes,
@@ -23,6 +23,7 @@ import { convertKeyValue } from "../../utils/array.helper";
 const CocktailCreactionSection = () => {
   // Data Selectors
   const userData = useSelector(selectUserData);
+  const cocktailFiltersData = useSelector(selectCocktailFiltersData);
   const ingredientsList = useSelector(selectIngredientsList);
   const glassesList = useSelector(selectGlassesList);
   const categoriesList = useSelector(selectCategoriesList);
@@ -32,6 +33,7 @@ const CocktailCreactionSection = () => {
   const [validStep, setValidStep] = React.useState(false);
   const [cocktailDetailsData, setCocktailDetailsData] = React.useState([]);
 
+  // Fetch APIs
   React.useEffect(() => {
     dispatch(fetchIngredients());
     dispatch(fetchGlasses());
@@ -39,15 +41,19 @@ const CocktailCreactionSection = () => {
     dispatch(fetchAlcoholicTypes());
   }, []);
 
+
+  // Create cocktail details array
   React.useEffect(() => {
     setCocktailDetailsData([
-      { label: "Ingredients", data: convertKeyValue(ingredientsList) },
+      { isMultiple:true, label: "Ingredients", data: convertKeyValue(ingredientsList) },
       { label: "Glasses", data: convertKeyValue(glassesList) },
       { label: "Categories", data: convertKeyValue(categoriesList) },
       { label: "AlcoholicTypes", data: convertKeyValue(alcoholicTypesList) },
     ]);
   }, [ingredientsList, glassesList, categoriesList, alcoholicTypesList]);
 
+
+  // Stepper steps data
   const steps = [
     {
       label: "Personel information",
@@ -57,7 +63,13 @@ const CocktailCreactionSection = () => {
     },
     {
       label: "Cocktail details",
-      content: <CocktailDetails cocktailDetailsData={cocktailDetailsData} />,
+      content: (
+        <CocktailDetails
+          cocktailDetailsData={cocktailDetailsData}
+          setValidStep={setValidStep}
+          cocktailFiltersData={cocktailFiltersData}
+        />
+      ),
     },
     {
       label: "Overview ",
@@ -67,7 +79,7 @@ const CocktailCreactionSection = () => {
   return (
     <div id="cocktailCreactionSection" className="cocktail-creaction-section">
       <SectionContainer>
-        <CustomizedSteppers steps={steps} validStep={validStep} />
+        <CustomizedSteppers steps={steps} validStep={validStep} setValidStep ={setValidStep}/>
       </SectionContainer>
     </div>
   );

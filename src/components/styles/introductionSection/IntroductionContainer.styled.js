@@ -6,4 +6,8 @@ export const IntroductionContainer = styled.div`
   background-image: url(${(props) => props.backgroundImage});
   background-size: cover;
   position: relative;
+  .introduction-section__scroll-link {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;

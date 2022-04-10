@@ -4,6 +4,7 @@
 import { all } from "redux-saga/effects";
 import {
   setUserDataWatcher,
+  setCocktailFiltersDataWatcher,
   fetchCocktailsWatcher,
   fetchIngredientsWatcher,
   fetchGlassesWatcher,
@@ -15,6 +16,7 @@ import {
 export default function* rootSaga() {
   yield all([
     setUserDataWatcher(),
+    setCocktailFiltersDataWatcher(),
     fetchCocktailsWatcher(),
     fetchIngredientsWatcher(),
     fetchGlassesWatcher(),

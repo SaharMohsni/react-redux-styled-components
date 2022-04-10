@@ -27,9 +27,15 @@ const initialLocal = {
 export const initialState = {
   local: initialLocal,
   data: {
-    userData: [],
+    userData: {},
+    cocktailFiltersData: {
+      Ingredients: [],
+      Glasses: "",
+      Categories: "",
+      AlcoholicTypes: "",
+    },
     cocktailsList: [],
-    ingredientsList: {},
+    ingredientsList: [],
     glassesList: [],
     categoriesList: [],
     alcoholicTypesList: [],
@@ -43,6 +49,11 @@ const cocktailBarReducer = (state = initialState, action) =>
       //Set user data
       case ActionTypes.SET_USER_DATA.success:
         draft.data.userData = action.payload;
+        break;
+
+      //Set Cocktail filters data
+      case ActionTypes.SET_COCKTAIL_FILTERS_DATA.success:
+        draft.data.cocktailFiltersData = action.payload;
         break;
 
       //Fetch Cocktails list

@@ -7,6 +7,10 @@ export const selectUserData = createSelector(
   (state) => state.cocktailBar,
   (cocktailBar) => cocktailBar.data.userData
 );
+export const selectCocktailFiltersData = createSelector(
+  (state) => state.cocktailBar,
+  (cocktailBar) => cocktailBar.data.cocktailFiltersData
+);
 export const selectCocktailsList = createSelector(
   (state) => state.cocktailBar,
   (cocktailBar) => cocktailBar.data.cocktailsList

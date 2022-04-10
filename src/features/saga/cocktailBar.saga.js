@@ -18,6 +18,25 @@ export function* setUserDataWatcher() {
   yield takeEvery(ActionTypes.SET_USER_DATA.request, setUserData);
 }
 
+//Set cocktail filters data
+export function* setCocktailFiltersData(action) {
+  try {
+    yield put({
+      type: ActionTypes.SET_COCKTAIL_FILTERS_DATA.success,
+      payload: action.payload,
+    });
+  } catch (e) {
+    yield put({ type: ActionTypes.SET_COCKTAIL_FILTERS_DATA.failure, e });
+  }
+}
+
+export function* setCocktailFiltersDataWatcher() {
+  yield takeEvery(
+    ActionTypes.SET_COCKTAIL_FILTERS_DATA.request,
+    setCocktailFiltersData
+  );
+}
+
 //Fetch Cocktails
 export function* fetchCocktails() {
   try {
@@ -52,8 +71,8 @@ export function* fetchIngredientsWatcher() {
   yield takeEvery(ActionTypes.FETCH_INGREDIENTS.request, fetchIngredients);
 }
 
-// Get Glasses
-export function* fetchGlasses(action) {
+// Fetch Glasses
+export function* fetchGlasses() {
   try {
     const results = yield call(api.fetchGlassesList);
     yield put({
@@ -70,7 +89,7 @@ export function* fetchGlassesWatcher() {
 }
 
 // Fetch Categories
-export function* fetchCategories(action) {
+export function* fetchCategories() {
   try {
     const results = yield call(api.fetchCategoriesList);
     yield put({
@@ -87,7 +106,7 @@ export function* fetchCategoriesWatcher() {
 }
 
 // Fetch Alcoholic Types
-export function* fetchAlcoholicTypes(action) {
+export function* fetchAlcoholicTypes() {
   try {
     const results = yield call(api.fetchAlcoholicTypesList);
     yield put({
