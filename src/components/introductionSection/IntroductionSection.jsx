@@ -6,7 +6,6 @@ import { Link as ScrollLink } from "react-scroll";
 import { Title } from "../styles/introductionSection/Title.styled";
 import { WelcomeCard } from "../styles/introductionSection/WelcomeCard.styled";
 import cocktailBarBackground from "../../assets/images/cocktail-bar-background.jpg";
-// import "./introductionSection.scss";
 const IntroductionSection = () => {
   return (
     <IntroductionContainer backgroundImage={cocktailBarBackground}>

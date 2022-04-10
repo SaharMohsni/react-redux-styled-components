@@ -29,10 +29,10 @@ export const initialState = {
   data: {
     userData: {},
     cocktailFiltersData: {
-      Ingredients: [],
-      Glasses: "",
-      Categories: "",
-      AlcoholicTypes: "",
+      ingredients: [],
+      glass: "",
+      category: "",
+      alcoholicType: "",
     },
     cocktailsList: [],
     ingredientsList: [],

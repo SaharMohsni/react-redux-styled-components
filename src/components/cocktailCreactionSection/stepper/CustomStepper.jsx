@@ -11,10 +11,14 @@ import { StepperContainer } from "../../styles/cocktailCreationSection/StepperCo
 
 const CustomStepper = ({ steps, validStep, setValidStep }) => {
   const [activeStep, setActiveStep] = React.useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setValidStep(false)
+  const isFinish = activeStep === steps.length - 1;
+  const handleNextOrFinish = () => {
+    if (isFinish) {
+      console.log("finish");
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setValidStep(false);
+    }
   };
 
   const handleBack = () => {
@@ -67,8 +71,11 @@ const CustomStepper = ({ steps, validStep, setValidStep }) => {
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
               {/* isNextDisabled */}
-              <Button onClick={handleNext} disabled={isNextDisabled}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              <Button
+                onClick={handleNextOrFinish}
+                disabled={isFinish ? false : isNextDisabled}
+              >
+                {isFinish ? "See result" : "Next"}
               </Button>
             </Box>
           </React.Fragment>

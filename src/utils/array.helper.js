@@ -8,3 +8,6 @@ export const convertKeyValue = (array) => {
     });
   }
 };
+
+
+export const convertToString = (array) => array.join(',')

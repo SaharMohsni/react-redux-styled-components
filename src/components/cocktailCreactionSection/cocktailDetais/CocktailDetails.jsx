@@ -57,7 +57,7 @@ const CocktailDetails = ({
   return (
     <ContainerWithVerticalContent>
       {cocktailDetailsData.map((cocktailDetails) => {
-        const { isMultiple, label, data } = cocktailDetails;
+        const { isMultiple, label, data, key } = cocktailDetails;
         return (
           <FormControl
             key={label}
@@ -80,8 +80,8 @@ const CocktailDetails = ({
                   : "demo-simple-select-standard"
               }`}
               multiple={isMultiple}
-              value={selectedData[label]}
-              name={label}
+              value={selectedData[key]}
+              name={key}
               onChange={(event, isMultiple) => handleChange(event, isMultiple)}
               label={label}
             >
