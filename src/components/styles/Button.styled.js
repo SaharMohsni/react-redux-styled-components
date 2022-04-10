@@ -7,6 +7,6 @@ export const Button = styled.button`
   color: rgba(0, 0, 0, 0.6);
   background-color: transparent;
   font-weight: 700;
-  align-self: end;
   margin-top: 50px;
+  cursor: pointer;
 `;
