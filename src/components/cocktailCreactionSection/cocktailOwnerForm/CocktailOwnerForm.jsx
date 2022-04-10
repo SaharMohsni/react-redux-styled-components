@@ -3,8 +3,10 @@ import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
 import InputLabel from "@mui/material/InputLabel";
-
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
+import { setUserData } from "../../../features/actions/cocktailBar.actions";
+
 import "./cocktailOwnerForm.scss";
 import {
   hasError,
@@ -13,19 +15,11 @@ import {
   validateInputTypeNumber,
   validateInputTypeText,
 } from "../../../utils/input.validation.helper";
-import {
-  hasKey,
-  isObjctEmpty,
-  isStringOrArrayEmpty,
-} from "../../../utils/isEmpty";
+import { hasKey, isObjctEmpty } from "../../../utils/isEmpty";
 
-const CocktailOwnerForm = () => {
-  const [inputs, setInputs] = React.useState({});
-  const [withError, setWithError] = React.useState(true);
-  console.log(
-    "🚀 ~ file: CocktailOwnerForm.jsx ~ line 25 ~ CocktailOwnerForm ~ withError",
-    withError
-  );
+const CocktailOwnerForm = ({ setValidStep, userData }) => {
+  const dispatch = useDispatch();
+  const [inputs, setInputs] = React.useState(userData);
 
   React.useEffect(() => {
     if (!isObjctEmpty(inputs)) {
@@ -35,13 +29,17 @@ const CocktailOwnerForm = () => {
         !inputsData.includes("") &&
         !hasEmailErrors()
       ) {
-        setWithError(false);
+        dispatch(setUserData(inputs));
+        setValidStep(true);
+      } else {
+        setValidStep(false);
       }
     }
   }, [inputs]);
 
   // Handle Input change with Field validations
   const handleChange = (event, fieldType = "") => {
+    console.log("here");
     const { name, value } = event.target;
 
     if (fieldType === "text") {
@@ -57,6 +55,10 @@ const CocktailOwnerForm = () => {
       }));
     }
     if (fieldType === "email") {
+      console.log(
+        "🚀 ~ file: CocktailOwnerForm.jsx ~ line 45 ~ handleChange ~ value",
+        value
+      );
       setInputs((state) => ({
         ...state,
         [name]: validateInputTypeEmail(value),
@@ -64,12 +66,12 @@ const CocktailOwnerForm = () => {
     }
   };
 
-  const hasEmailErrors = () =>  hasError(inputs, "email") ||
+  const hasEmailErrors = () =>
+    hasError(inputs, "email") ||
     (hasKey(inputs, "email") && !isValidEmail(inputs["email"]));
 
   // email has error
-  const emailHasError = hasEmailErrors()
-   
+  const emailHasError = hasEmailErrors();
 
   return (
     <Box

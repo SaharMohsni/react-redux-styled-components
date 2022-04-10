@@ -6,13 +6,10 @@ import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { isObjctEmpty } from "../../../utils/isEmpty";
 
-const CustomStepper = ({ steps }) => {
+const CustomStepper = ({ steps, validStep }) => {
   const [activeStep, setActiveStep] = React.useState(0);
-
-  const isStepOptional = (step) => {
-    return step === 1;
-  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -25,6 +22,8 @@ const CustomStepper = ({ steps }) => {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const isNextDisabled = !validStep;
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -65,7 +64,7 @@ const CustomStepper = ({ steps }) => {
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
 
-            <Button onClick={handleNext} disabled={true}>
+            <Button onClick={handleNext} disabled={isNextDisabled}>
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Box>

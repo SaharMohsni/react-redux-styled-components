@@ -1,32 +1,37 @@
 import React from "react";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
+
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData } from "../../features/selectors/coktailBar.selectors";
 import CustomizedSteppers from "../../shared/components/stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";
 const CocktailCreactionSection = () => {
+  const userData = useSelector(selectUserData);
+  const [validStep, setValidStep] = React.useState(false);
 
-    const steps = [
-      {
-        label: "Personel information",
-        description: `Enter your data`,
-        content: <CocktailOwnerForm />,
-      },
-      {
-        label: "Cocktail details",
-        description: "Choose your selection",
-        content: "",
-      },
-      {
-        label: "Overview ",
-        description: `Choosed and entered data`,
-        content: "",
-      },
-    ];
+  const steps = [
+    {
+      label: "Personel information",
+      description: `Enter your data`,
+      content: (
+        <CocktailOwnerForm setValidStep={setValidStep} userData={userData} />
+      ),
+    },
+    {
+      label: "Cocktail details",
+      description: "Choose your selection",
+      content: "",
+    },
+    {
+      label: "Overview ",
+      description: `Choosed and entered data`,
+      content: "",
+    },
+  ];
   return (
     <div id="cocktailCreactionSection">
       <SectionContainer>
-        <CustomizedSteppers steps={steps} />
+        <CustomizedSteppers steps={steps} validStep={validStep} />
       </SectionContainer>
     </div>
   );

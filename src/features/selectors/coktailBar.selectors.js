@@ -1,7 +1,13 @@
 /**
  * Cocktail Bar selectors
  */
-import { createSelector } from 'reselect';
+import { createSelector } from "reselect";
 
-export const selectCocktailsList = createSelector((state) => state.cocktailBar, (cocktailBar) => cocktailBar.data.cocktailsList);
-
+export const selectUserData = createSelector(
+  (state) => state.cocktailBar,
+  (cocktailBar) => cocktailBar.data.userData
+);
+export const selectCocktailsList = createSelector(
+  (state) => state.cocktailBar,
+  (cocktailBar) => cocktailBar.data.cocktailsList
+);

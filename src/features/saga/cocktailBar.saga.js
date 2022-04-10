@@ -2,6 +2,22 @@ import { put, call, takeEvery } from "redux-saga/effects";
 import * as api from "../services/cocktailBar.service";
 import ActionTypes from "../constants/cocktailBar.constants";
 
+//Set user data
+export function* setUserData(action) {
+  try {
+    yield put({
+      type: ActionTypes.SET_USER_DATA.success,
+      payload: action.payload,
+    });
+  } catch (e) {
+    yield put({ type: ActionTypes.SET_USER_DATA.failure, e });
+  }
+}
+
+export function* setUserDataWatcher() {
+  yield takeEvery(ActionTypes.SET_USER_DATA.request, setUserData);
+}
+
 //Fetch Cocktails
 export function* fetchCocktails() {
   try {
@@ -52,7 +68,6 @@ export function* fetchGlassesWatcher() {
   yield takeEvery(ActionTypes.FETCH_GLASSES.request, fetchGlasses);
 }
 
-
 // Fetch Categories
 export function* fetchCategories(action) {
   try {
@@ -82,5 +97,8 @@ export function* fetchAlcoholicTypes(action) {
 }
 
 export function* fetchAlcoholicTypesWatcher() {
-  yield takeEvery(ActionTypes.FETCH_ALCOHOLIC_TYPES.request, fetchAlcoholicTypes);
+  yield takeEvery(
+    ActionTypes.FETCH_ALCOHOLIC_TYPES.request,
+    fetchAlcoholicTypes
+  );
 }
