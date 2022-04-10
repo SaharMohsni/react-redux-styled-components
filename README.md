@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+## Cocktail Bar
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Description
 
-## Available Scripts
+A single page application presenting a cocktail bar where the user is asked to enter his personel information that he can be able to create his own cocktail depending on specific filters choosed.
+The user will be able to custom his cocktail if he enter all his data.
+A filter slection is provided like the glasses, the ingridents of the cocktail, category of the coctail and the type of alcohol wanted.
 
-In the project directory, you can run:
+If the selection give as a cocktail, a section with the result will be generated. If there is no result deprending on this filter a dialog will opened with no cocktail with this filter message.
 
-### `npm start`
+This project is built with React, Redux saga, Javascript, styled components, Material UI and some of scss.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Responsive project.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Status
 
-### `npm test`
+This project is finished: development and documentation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Installation and Setup Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Clone down this repository and the back-end repository. You will need `node` and `npm` installed globally on your machine.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Installation:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm install`  
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To Start the project :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+`npm start`  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To Visit App:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`localhost:3000`  
 
-## Learn More
+## Reflection
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This was a 2 days long project built during my technical test for the Front-End Developer position. Project goals development of a single page responsive application using react javascript, redux-saga, styled components and Material UI. The design of the page was a simple idea by me ( no mok-up provided).  
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The main role of this application is being a helper for the cocktail bar owber to get the most cocktails wanted by clients. It allow users to create their own cocktail depending on their needs. So they can make different combination of ingridents, category, glasses and alcohol type to get the combination. I started this process by using the `create-react-app` boilerplate, then adding `redux-saga` and other dependances needed.  
 
-### Code Splitting
+One of the main challenges I ran into was the use of work on this just in two days ( weekend). 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Because i needed to deliver the project i tried to make the project work but it still need more improvement on the UI side. I will considered adding a test process is a future feature that can be added beside the UI improvement.
 
-### Analyzing the Bundle Size
+Managing time was my biggest challenge in this project because I was working on another at the same time.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+At the end of the project, the technologies implemented was `javascript`, `React`, `Redux-saga`, `Material UI`, `styled components`, and a significant amount of VanillaJS and CSS for the front-end part. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+In the next iteration the front-end part could be optimized on different devices and the application will became better after adding the unit tests and fixing the problems that will be detected.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
