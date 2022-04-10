@@ -21,6 +21,11 @@ export const fetchCocktails = () => {
   return action(ActionTypes.FETCH_COCKTAILS.request);
 };
 
+// Set Cocktail list after filter
+export const setFiltredCocktailList = () => {
+  return action(ActionTypes.SET_FILTRED_COCKTAIL_LIST.request);
+};
+
 // Fetched Cocktails ingredients
 export const fetchIngredients = () => {
   return action(ActionTypes.FETCH_INGREDIENTS.request);

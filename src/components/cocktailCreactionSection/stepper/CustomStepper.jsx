@@ -10,12 +10,17 @@ import { StepperContainer } from "../../styles/cocktailCreationSection/StepperCo
 import { useMobile } from "../../../utils/useMobile";
 import { StepperTitleContainer } from "../../styles/StepperTitleContainer.styled";
 
-const CustomStepper = ({ steps, validStep, setValidStep }) => {
+const CustomStepper = ({
+  steps,
+  validStep,
+  setValidStep,
+  setfilterIsCreated,
+}) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const isFinish = activeStep === steps.length - 1;
   const handleNextOrFinish = () => {
     if (isFinish) {
-      console.log("finish");
+      setfilterIsCreated(true)
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setValidStep(false);

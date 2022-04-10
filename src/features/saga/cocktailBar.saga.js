@@ -43,7 +43,7 @@ export function* fetchCocktails() {
     const results = yield call(api.fetchCocktailsList);
     yield put({
       type: ActionTypes.FETCH_COCKTAILS.success,
-      data: results,
+      data: results.drinks,
     });
   } catch (e) {
     yield put({ type: ActionTypes.FETCH_COCKTAILS.failure, e });
@@ -53,6 +53,22 @@ export function* fetchCocktails() {
 export function* fetchCocktailsWatcher() {
   yield takeEvery(ActionTypes.FETCH_COCKTAILS.request, fetchCocktails);
 }
+
+//Set Cocktail list after filter
+export function* setFiltredCocktailList() {
+  try {
+    yield put({
+      type: ActionTypes.SET_FILTRED_COCKTAIL_LIST.success,
+    });
+  } catch (e) {
+    yield put({ type: ActionTypes.SET_FILTRED_COCKTAIL_LIST.failure, e });
+  }
+}
+export function* setFiltredCocktailListWatcher() {
+  yield takeEvery(ActionTypes.SET_FILTRED_COCKTAIL_LIST.request, setFiltredCocktailList);
+}
+
+
 
 //Fetch Ingredients
 export function* fetchIngredients() {

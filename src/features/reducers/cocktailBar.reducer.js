@@ -6,10 +6,12 @@
  */
 import produce from "immer";
 import ActionTypes from "../constants/cocktailBar.constants";
+import { filterCocktails } from "./cocktailBar.reducer.helper";
 
 const initialLocal = {
   loading: {
     fetchCocktailsLoading: false,
+    setFiltredCocktailsLoading: false,
     fetchIngredientsLoading: false,
     fetchGlassesLoading: false,
     fetchCategoriesLoading: false,
@@ -18,6 +20,7 @@ const initialLocal = {
   errors: {
     fetchCocktailsErrors: "",
     fetchIngredientsErrors: "",
+    setFiltredCocktailsErrors: "",
     fetchGlassesErrors: "",
     fetchCategoriesErrors: "",
     fetchAlcoholicTypesErrors: "",
@@ -34,6 +37,7 @@ export const initialState = {
       category: "",
       alcoholicType: "",
     },
+    filtredCocktailList :[],
     cocktailsList: [],
     ingredientsList: [],
     glassesList: [],
@@ -63,12 +67,23 @@ const cocktailBarReducer = (state = initialState, action) =>
         break;
       case ActionTypes.FETCH_COCKTAILS.success:
         draft.local.loading.fetchCocktailsLoading = false;
-        draft.data.cocktailsList = action.data;
+        draft.data.cocktailsList =  action.data
         break;
       case ActionTypes.FETCH_COCKTAILS.failure:
         draft.local.loading.fetchCocktailsLoading = false;
         draft.local.errors.fetchCocktailsErrors = action.e.response.data.error;
         break;
+
+      //Filter Cocktails list
+   
+      case ActionTypes.SET_FILTRED_COCKTAIL_LIST.success:
+        draft.local.loading.setFiltredCocktailsLoading = false;
+        draft.data.filtredCocktailList = filterCocktails(
+          state.data.cocktailsList,
+          state.data.cocktailFiltersData
+        );
+        break;
+    
 
       //Fetch Ingredients list
       case ActionTypes.FETCH_INGREDIENTS.request:

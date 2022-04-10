@@ -11,3 +11,16 @@ export const convertKeyValue = (array) => {
 
 
 export const convertToString = (array) => array.join(',')
+
+export const isStringInArray = (array, string) => array.includes(string);
+
+export const exist = (firstArray, secondArray) => {
+    // Comparing each element of array
+    for (var i = 0; i < firstArray.length; i++) {
+     if(isStringInArray(firstArray[i],secondArray)){
+       return true
+     }
+     else return false
+    }
+  
+}

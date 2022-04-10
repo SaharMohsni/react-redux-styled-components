@@ -13,34 +13,20 @@ import CustomizedSteppers from "./stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";
 import CocktailDetails from "./cocktailDetais/CocktailDetails";
-import {
-  fetchAlcoholicTypes,
-  fetchCategories,
-  fetchGlasses,
-  fetchIngredients,
-} from "../../features/actions/cocktailBar.actions";
+
 import { convertKeyValue } from "../../utils/array.helper";
 import OverviewSection from "./overviewSection/OverviewSection";
-const CocktailCreactionSection = () => {
-  // Data Selectors
-  const userData = useSelector(selectUserData);
-  const cocktailFiltersData = useSelector(selectCocktailFiltersData);
-  const ingredientsList = useSelector(selectIngredientsList);
-  const glassesList = useSelector(selectGlassesList);
-  const categoriesList = useSelector(selectCategoriesList);
-  const alcoholicTypesList = useSelector(selectAlcoholicTypesList);
-
-  const dispatch = useDispatch();
+const CocktailCreactionSection = ({
+  setfilterIsCreated,
+  userData,
+  cocktailFiltersData,
+  ingredientsList,
+  glassesList,
+  categoriesList,
+  alcoholicTypesList,
+}) => {
   const [validStep, setValidStep] = React.useState(false);
   const [cocktailDetailsData, setCocktailDetailsData] = React.useState([]);
-
-  // Fetch APIs
-  React.useEffect(() => {
-    dispatch(fetchIngredients());
-    dispatch(fetchGlasses());
-    dispatch(fetchCategories());
-    dispatch(fetchAlcoholicTypes());
-  }, []);
 
   // Create cocktail details array
   React.useEffect(() => {
@@ -104,6 +90,7 @@ const CocktailCreactionSection = () => {
           steps={steps}
           validStep={validStep}
           setValidStep={setValidStep}
+          setfilterIsCreated={setfilterIsCreated}
         />
       </SectionContainer>
     </div>
