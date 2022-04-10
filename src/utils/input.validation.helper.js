@@ -1,4 +1,4 @@
-import { isStringOrArrayEmpty } from "./isEmpty";
+import { hasKey, isStringOrArrayEmpty } from "./isEmpty";
 
 // Accept only letters
 export const validateInputTypeText = (text) => {
@@ -26,3 +26,8 @@ export const isValidEmail = (email) => {
    return regex.test(email);
 
 }
+
+// Input has error
+  export const hasError = (inputs,field) => {
+    return hasKey(inputs, field) && isStringOrArrayEmpty(inputs[field]);
+  };

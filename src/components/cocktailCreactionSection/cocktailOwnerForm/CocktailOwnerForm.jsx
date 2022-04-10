@@ -1,16 +1,13 @@
 import React from "react";
-import FilledInput from "@mui/material/FilledInput";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Input from "@mui/material/Input";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 
 import Box from "@mui/material/Box";
-import InputAdornment from "@mui/material/InputAdornment";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import "./cocktailOwnerForm.scss";
 import {
+  hasError,
   isValidEmail,
   validateInputTypeEmail,
   validateInputTypeNumber,
@@ -24,10 +21,24 @@ import {
 
 const CocktailOwnerForm = () => {
   const [inputs, setInputs] = React.useState({});
+  const [withError, setWithError] = React.useState(true);
   console.log(
-    "🚀 ~ file: CocktailOwnerForm.jsx ~ line 27 ~ CocktailOwnerForm ~ inputs",
-    inputs
+    "🚀 ~ file: CocktailOwnerForm.jsx ~ line 25 ~ CocktailOwnerForm ~ withError",
+    withError
   );
+
+  React.useEffect(() => {
+    if (!isObjctEmpty(inputs)) {
+      let inputsData = Object.values(inputs);
+      if (
+        inputsData.length === 5 &&
+        !inputsData.includes("") &&
+        !hasEmailErrors()
+      ) {
+        setWithError(false);
+      }
+    }
+  }, [inputs]);
 
   // Handle Input change with Field validations
   const handleChange = (event, fieldType = "") => {
@@ -53,15 +64,12 @@ const CocktailOwnerForm = () => {
     }
   };
 
-  // Input has error
-  const hasError = (field) => {
-    return hasKey(inputs, field) && isStringOrArrayEmpty(inputs[field]);
-  };
+  const hasEmailErrors = () =>  hasError(inputs, "email") ||
+    (hasKey(inputs, "email") && !isValidEmail(inputs["email"]));
 
   // email has error
-  const emailHasError =
-    hasError("email") ||
-    (hasKey(inputs, "email") && !isValidEmail(inputs["email"]));
+  const emailHasError = hasEmailErrors()
+   
 
   return (
     <Box
@@ -73,7 +81,7 @@ const CocktailOwnerForm = () => {
       autoComplete="off"
       className="cocktail-owner-form"
     >
-      <FormControl error={hasError("cocktailName")} variant="standard">
+      <FormControl error={hasError(inputs, "cocktailName")} variant="standard">
         <InputLabel htmlFor="component-error">Cocktail Name</InputLabel>
         <Input
           type="text"
@@ -84,13 +92,13 @@ const CocktailOwnerForm = () => {
           value={inputs["cocktailName"]}
           onChange={(event) => handleChange(event, "text")}
         />
-        {hasError("cocktailName") && (
+        {hasError(inputs, "cocktailName") && (
           <FormHelperText id="component-error-text">
             Required Field
           </FormHelperText>
         )}
       </FormControl>
-      <FormControl error={hasError("firstName")} variant="standard">
+      <FormControl error={hasError(inputs, "firstName")} variant="standard">
         <InputLabel htmlFor="component-error">First Name</InputLabel>
         <Input
           type="text"
@@ -100,13 +108,13 @@ const CocktailOwnerForm = () => {
           value={inputs["firstName"]}
           onChange={(event) => handleChange(event, "text")}
         />
-        {hasError("firstName") && (
+        {hasError(inputs, "firstName") && (
           <FormHelperText id="component-error-text">
             Required Field
           </FormHelperText>
         )}
       </FormControl>
-      <FormControl error={hasError("lastName")} variant="standard">
+      <FormControl error={hasError(inputs, "lastName")} variant="standard">
         <InputLabel htmlFor="component-error">Last Name</InputLabel>
         <Input
           type="text"
@@ -116,13 +124,13 @@ const CocktailOwnerForm = () => {
           value={inputs["lastName"]}
           onChange={(event) => handleChange(event, "text")}
         />
-        {hasError("lastName") && (
+        {hasError(inputs, "lastName") && (
           <FormHelperText id="component-error-text">
             Required Field
           </FormHelperText>
         )}
       </FormControl>
-      <FormControl error={hasError("phoneNumber")} variant="standard">
+      <FormControl error={hasError(inputs, "phoneNumber")} variant="standard">
         <InputLabel htmlFor="component-error">Phone Number</InputLabel>
         <Input
           id="component-error"
@@ -130,7 +138,7 @@ const CocktailOwnerForm = () => {
           value={inputs["phoneNumber"]}
           onChange={(event) => handleChange(event, "number")}
         />
-        {hasError("phoneNumber") && (
+        {hasError(inputs, "phoneNumber") && (
           <FormHelperText id="component-error-text">
             Required Field
           </FormHelperText>
@@ -147,7 +155,7 @@ const CocktailOwnerForm = () => {
         />
         {emailHasError && (
           <FormHelperText id="component-error-text">
-            {!isValidEmail(inputs["email"]) && !hasError("email")
+            {!isValidEmail(inputs["email"]) && !hasError(inputs, "email")
               ? "Email not valid"
               : "Required Field"}
           </FormHelperText>
