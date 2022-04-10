@@ -27,11 +27,11 @@ const initialLocal = {
 export const initialState = {
   local: initialLocal,
   data: {
-    userData: {},
+    userData: [],
     cocktailsList: [],
-    ingredientsList: [],
+    ingredientsList: {},
     glassesList: [],
-    CategoriesList: [],
+    categoriesList: [],
     alcoholicTypesList: [],
   },
 };
@@ -95,7 +95,7 @@ const cocktailBarReducer = (state = initialState, action) =>
         break;
       case ActionTypes.FETCH_CATEGORIES.success:
         draft.local.loading.fetchCategoriesLoading = false;
-        draft.data.alcoholicTypesList = action.data;
+        draft.data.categoriesList = action.data;
         break;
       case ActionTypes.FETCH_CATEGORIES.failure:
         draft.local.loading.fetchCategoriesLoading = false;

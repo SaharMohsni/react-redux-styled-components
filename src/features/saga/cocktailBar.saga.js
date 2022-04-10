@@ -41,7 +41,7 @@ export function* fetchIngredients() {
     const results = yield call(api.fetchIngredientsList);
     yield put({
       type: ActionTypes.FETCH_INGREDIENTS.success,
-      data: results,
+      data: results.drinks,
     });
   } catch (e) {
     yield put({ type: ActionTypes.FETCH_INGREDIENTS.failure, e });
@@ -55,9 +55,10 @@ export function* fetchIngredientsWatcher() {
 // Get Glasses
 export function* fetchGlasses(action) {
   try {
+    const results = yield call(api.fetchGlassesList);
     yield put({
       type: ActionTypes.FETCH_GLASSES.success,
-      payload: action.payload,
+      data: results.drinks,
     });
   } catch (e) {
     yield put({ type: ActionTypes.FETCH_GLASSES.failure, e });
@@ -71,9 +72,10 @@ export function* fetchGlassesWatcher() {
 // Fetch Categories
 export function* fetchCategories(action) {
   try {
+    const results = yield call(api.fetchCategoriesList);
     yield put({
       type: ActionTypes.FETCH_CATEGORIES.success,
-      payload: action.payload,
+      data: results.drinks,
     });
   } catch (e) {
     yield put({ type: ActionTypes.FETCH_CATEGORIES.failure, e });
@@ -87,9 +89,10 @@ export function* fetchCategoriesWatcher() {
 // Fetch Alcoholic Types
 export function* fetchAlcoholicTypes(action) {
   try {
+    const results = yield call(api.fetchAlcoholicTypesList);
     yield put({
       type: ActionTypes.FETCH_ALCOHOLIC_TYPES.success,
-      payload: action.payload,
+      data: results.drinks,
     });
   } catch (e) {
     yield put({ type: ActionTypes.FETCH_ALCOHOLIC_TYPES.failure, e });

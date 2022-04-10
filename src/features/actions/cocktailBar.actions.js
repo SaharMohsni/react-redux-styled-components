@@ -16,7 +16,7 @@ export const fetchIngredients = () => {
   return action(ActionTypes.FETCH_INGREDIENTS.request);
 };
 
-export const fetchglasses = () => {
+export const fetchGlasses = () => {
   return action(ActionTypes.FETCH_GLASSES.request);
 };
 export const fetchCategories = () => {
