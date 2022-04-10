@@ -15,6 +15,7 @@ const CocktailCreactionSection = ({
   glassesList,
   categoriesList,
   alcoholicTypesList,
+  setIsFetchedData,
 }) => {
   const [validStep, setValidStep] = React.useState(false);
   const [cocktailDetailsData, setCocktailDetailsData] = React.useState([]);
@@ -82,6 +83,7 @@ const CocktailCreactionSection = ({
           validStep={validStep}
           setValidStep={setValidStep}
           setfilterIsCreated={setfilterIsCreated}
+          setIsFetchedData={setIsFetchedData}
         />
       </SectionContainer>
     </div>

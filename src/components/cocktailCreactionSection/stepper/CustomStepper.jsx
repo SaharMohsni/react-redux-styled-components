@@ -15,22 +15,24 @@ const CustomStepper = ({
   validStep,
   setValidStep,
   setfilterIsCreated,
+  setIsFetchedData,
 }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const isFinish = activeStep === steps.length - 1;
   const handleNextOrFinish = () => {
     if (isFinish) {
-      setfilterIsCreated(true)
+      setfilterIsCreated(true);
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setValidStep(false);
-       setfilterIsCreated(false);
+      setfilterIsCreated(false);
     }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setfilterIsCreated(false);
+    setIsFetchedData(false);
   };
 
   const handleReset = () => {
@@ -39,7 +41,7 @@ const CustomStepper = ({
 
   const isNextDisabled = !validStep;
   const isMobile = useMobile();
-  
+
   return (
     <StepperContainer>
       <Box sx={{ width: "100%" }}>

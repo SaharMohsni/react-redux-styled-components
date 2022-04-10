@@ -40,6 +40,16 @@ const Home = () => {
   //Local State
   const [filterIsCreated, setfilterIsCreated] = React.useState(false);
   const [emptyDialogOpen, setEmptyDialogOpen] = React.useState(false);
+  const [isFetchedData, setIsFetchedData] = React.useState(false);
+  console.log("🚀 ~ file: home.jsx ~ line 44 ~ Home ~ isFetchedData", isFetchedData)
+  console.log(
+    "🚀 ~ file: home.jsx ~ line 43 ~ Home ~ emptyDialogOpen",
+    emptyDialogOpen
+  );
+  console.log(
+    "🚀 ~ file: home.jsx ~ line 61 ~ React.useEffect ~ isStringOrArrayEmpty(filtredCocktailList)",
+    isStringOrArrayEmpty(filtredCocktailList)
+  );
 
   // Fetch APIs
   React.useEffect(() => {
@@ -55,11 +65,19 @@ const Home = () => {
   React.useEffect(() => {
     if (filterIsCreated) {
       dispatch(setFiltredCocktailList());
-    }
-    if (filterIsCreated && isStringOrArrayEmpty(filtredCocktailList)) {
-      setEmptyDialogOpen(true);
+      setIsFetchedData(true)
     }
   }, [filterIsCreated, cocktailFiltersData]);
+
+  React.useEffect(() => {
+    if (
+      isFetchedData && filterIsCreated &&
+      isStringOrArrayEmpty(filtredCocktailList)
+    ) {
+      console.log("%chome.jsx line:62 here", "color: #007acc;");
+      setEmptyDialogOpen(true);
+    }
+  }, [filterIsCreated, cocktailFiltersData, isFetchedData]);
 
   return (
     <div className="home">
@@ -72,6 +90,7 @@ const Home = () => {
         glassesList={glassesList}
         categoriesList={categoriesList}
         alcoholicTypesList={alcoholicTypesList}
+        setIsFetchedData={setIsFetchedData}
       />
       {filterIsCreated && !isStringOrArrayEmpty(filtredCocktailList) && (
         <FiltredCocktailListSection
