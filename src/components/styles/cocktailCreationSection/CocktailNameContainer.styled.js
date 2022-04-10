@@ -4,4 +4,5 @@ export const CocktailNameContainer = styled.div`
   font-family: cursive;
   color: #d219bd;
   text-align: center;
+  text-transform: uppercase;
 `;

@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { isObjctEmpty } from "../../../utils/isEmpty";
 import { StepperContainer } from "../../styles/cocktailCreationSection/StepperContainer.styled";
+import { useMobile } from "../../../utils/useMobile";
+import { MobileStepperTitleContainer } from "../../styles/MobileStepperTitleContainer.styled";
 
 const CustomStepper = ({ steps, validStep, setValidStep }) => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -30,21 +32,26 @@ const CustomStepper = ({ steps, validStep, setValidStep }) => {
   };
 
   const isNextDisabled = !validStep;
-
+const isMobile = useMobile()
   return (
     <StepperContainer>
       <Box sx={{ width: "100%" }}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((step) => {
-            const stepProps = {};
-            const labelProps = {};
-            return (
-              <Step key={step.label} {...stepProps}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
+        {isMobile ? (
+          <MobileStepperTitleContainer>Make your selection</MobileStepperTitleContainer>
+        ) : (
+          <Stepper activeStep={activeStep}>
+            {steps.map((step) => {
+              const stepProps = {};
+              const labelProps = {};
+              return (
+                <Step key={step.label} {...stepProps}>
+                  <StepLabel {...labelProps}>{step.label}</StepLabel>
+                </Step>
+              );
+            })}
+          </Stepper>
+        )}
+
         {activeStep === steps.length ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>

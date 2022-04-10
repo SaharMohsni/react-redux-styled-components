@@ -9,4 +9,9 @@ export const WelcomeCard = styled.div`
   display: flex;
   justify-content: space-between;
   font-family: cursive;
+  @media (min-width: 320px) and (max-width: 992px) {
+    margin: 70px 0px 70px 70px;
+    width: calc(100% - 70px);
+    right: 0;
+  }
 `;

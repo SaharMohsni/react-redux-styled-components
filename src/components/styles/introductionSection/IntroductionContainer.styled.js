@@ -9,5 +9,8 @@ export const IntroductionContainer = styled.div`
   .introduction-section__scroll-link {
     display: flex;
     justify-content: flex-end;
+    @media (min-width: 320px) and (max-width: 992px) {
+      justify-content: flex-start;
+    }
   }
 `;

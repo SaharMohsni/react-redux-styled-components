@@ -7,7 +7,11 @@ export const Card = styled.div`
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content:center h3 {
+  justify-content: center;
+  @media (min-width: 320px) and (max-width: 992px) {
+    justify-content: flex-start;
+  }
+  h3 {
     font-weigth: bold;
   }
   .title {
