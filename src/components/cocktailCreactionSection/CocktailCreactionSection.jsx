@@ -1,17 +1,36 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserData } from "../../features/selectors/coktailBar.selectors";
+import {
+  selectAlcoholicTypesList,
+  selectCategoriesList,
+  selectGlassesList,
+  selectIngredientsList,
+  selectUserData,
+} from "../../features/selectors/coktailBar.selectors";
 import CustomizedSteppers from "./stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";
 import "./cocktailCreactionSection.scss";
 import CocktailDetails from "./cocktailDetais/CocktailDetails";
-import { fetchAlcoholicTypes, fetchCategories, fetchGlasses, fetchIngredients } from "../../features/actions/cocktailBar.actions";
+import {
+  fetchAlcoholicTypes,
+  fetchCategories,
+  fetchGlasses,
+  fetchIngredients,
+} from "../../features/actions/cocktailBar.actions";
+import { convertKeyValue } from "../../utils/array.helper";
 const CocktailCreactionSection = () => {
+  // Data Selectors
   const userData = useSelector(selectUserData);
+  const ingredientsList = useSelector(selectIngredientsList);
+  const glassesList = useSelector(selectGlassesList);
+  const categoriesList = useSelector(selectCategoriesList);
+  const alcoholicTypesList = useSelector(selectAlcoholicTypesList);
+
   const dispatch = useDispatch();
   const [validStep, setValidStep] = React.useState(false);
+  const [cocktailDetailsData, setCocktailDetailsData] = React.useState([]);
 
   React.useEffect(() => {
     dispatch(fetchIngredients());
@@ -19,13 +38,15 @@ const CocktailCreactionSection = () => {
     dispatch(fetchCategories());
     dispatch(fetchAlcoholicTypes());
   }, []);
-  
-  const cocktailDetailsData = [
-    { label: "Ingredients", data: [] },
-    { label: "Glasses", data: [] },
-    { label: "Categories", data: [] },
-    { label: "AlcoholicTypes", data: [] },
-  ];
+
+  React.useEffect(() => {
+    setCocktailDetailsData([
+      { label: "Ingredients", data: convertKeyValue(ingredientsList) },
+      { label: "Glasses", data: convertKeyValue(glassesList) },
+      { label: "Categories", data: convertKeyValue(categoriesList) },
+      { label: "AlcoholicTypes", data: convertKeyValue(alcoholicTypesList) },
+    ]);
+  }, [ingredientsList, glassesList, categoriesList, alcoholicTypesList]);
 
   const steps = [
     {
@@ -36,7 +57,7 @@ const CocktailCreactionSection = () => {
     },
     {
       label: "Cocktail details",
-      content:<CocktailDetails/>,
+      content: <CocktailDetails cocktailDetailsData={cocktailDetailsData} />,
     },
     {
       label: "Overview ",
