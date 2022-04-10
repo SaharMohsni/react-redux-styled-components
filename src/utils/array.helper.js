@@ -1,4 +1,6 @@
 import { isStringOrArrayEmpty } from "./isEmpty";
+import { isMatch } from "./string.helper";
+
 
 export const convertKeyValue = (array) => {
   if (!isStringOrArrayEmpty(array)) {
@@ -9,18 +11,18 @@ export const convertKeyValue = (array) => {
   }
 };
 
+export const convertToString = (array) => array.join(",");
 
-export const convertToString = (array) => array.join(',')
+// Test if a specific string is in array
+export const isStringInArray = (array, string) => {
+  let res = array.filter((element) => {
+    return isMatch(element, string);
+  });
 
-export const isStringInArray = (array, string) => array.includes(string);
+  return res.length > 0;
+};
 
-export const exist = (firstArray, secondArray) => {
-    // Comparing each element of array
-    for (var i = 0; i < firstArray.length; i++) {
-     if(isStringInArray(firstArray[i],secondArray)){
-       return true
-     }
-     else return false
-    }
-  
-}
+// Test if element from first array one exist in second array
+export const exist = (firstArray, secondArray) =>  firstArray.some((element) => isStringInArray(secondArray, element));
+ 
+

@@ -31,3 +31,7 @@ export const selectAlcoholicTypesList = createSelector(
   (state) => state.cocktailBar,
   (cocktailBar) => cocktailBar.data.alcoholicTypesList
 );
+export const selectFiltredCocktailList = createSelector(
+  (state) => state.cocktailBar,
+  (cocktailBar) => cocktailBar.data.filtredCocktailList
+);

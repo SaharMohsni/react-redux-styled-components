@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CocktailCreactionSection from "../components/cocktailCreactionSection/CocktailCreactionSection";
+import FiltredCocktailListSection from "../components/filtredCocktailListSection/FiltredCocktailListSection";
 import Footer from "../components/footer/Footer";
 import IntroductionSection from "../components/introductionSection/IntroductionSection";
 import {
@@ -15,12 +16,17 @@ import {
   selectAlcoholicTypesList,
   selectCategoriesList,
   selectCocktailFiltersData,
+  selectFiltredCocktailList,
   selectGlassesList,
   selectIngredientsList,
   selectUserData,
 } from "../features/selectors/coktailBar.selectors";
+import CustomDialog from "../shared/components/CustomDialog";
+import { isStringOrArrayEmpty } from "../utils/isEmpty";
 const Home = () => {
   const dispatch = useDispatch();
+
+ 
   // Data Selectors
   const userData = useSelector(selectUserData);
   const cocktailFiltersData = useSelector(selectCocktailFiltersData);
@@ -28,7 +34,12 @@ const Home = () => {
   const glassesList = useSelector(selectGlassesList);
   const categoriesList = useSelector(selectCategoriesList);
   const alcoholicTypesList = useSelector(selectAlcoholicTypesList);
+  const filtredCocktailList = useSelector(selectFiltredCocktailList);
+
+  //Local State
   const [filterIsCreated, setfilterIsCreated] = React.useState(false);
+   const [emptyDialogOpen, setEmptyDialogOpen] = React.useState(false);
+
   // Fetch APIs
   React.useEffect(() => {
     dispatch(fetchCocktails());
@@ -43,7 +54,11 @@ const Home = () => {
     if (filterIsCreated) {
       dispatch(setFiltredCocktailList());
     }
+    if (filterIsCreated && isStringOrArrayEmpty(filtredCocktailList)) {
+      setEmptyDialogOpen(true);
+    }
   }, [filterIsCreated, cocktailFiltersData]);
+
 
   return (
     <div className="home">
@@ -57,6 +72,10 @@ const Home = () => {
         categoriesList={categoriesList}
         alcoholicTypesList={alcoholicTypesList}
       />
+      {filterIsCreated && !isStringOrArrayEmpty(filtredCocktailList) && (
+        <FiltredCocktailListSection filtredCocktailList={filtredCocktailList} />
+      )}
+      <CustomDialog open={emptyDialogOpen} setOpen={setEmptyDialogOpen} />
       <Footer />
     </div>
   );

@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { StepperContainer } from "../../styles/cocktailCreationSection/StepperContainer.styled";
 import { useMobile } from "../../../utils/useMobile";
-import { StepperTitleContainer } from "../../styles/StepperTitleContainer.styled";
+import { SectionTitleContainer } from "../../styles/SectionTitleContainer.styled";
 
 const CustomStepper = ({
   steps,
@@ -24,11 +24,13 @@ const CustomStepper = ({
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setValidStep(false);
+       setfilterIsCreated(false);
     }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setfilterIsCreated(false);
   };
 
   const handleReset = () => {
@@ -37,13 +39,14 @@ const CustomStepper = ({
 
   const isNextDisabled = !validStep;
   const isMobile = useMobile();
+  
   return (
     <StepperContainer>
       <Box sx={{ width: "100%" }}>
-        <StepperTitleContainer>
+        <SectionTitleContainer>
           <span>Make your selection</span>
           <LocalBarIcon />
-        </StepperTitleContainer>
+        </SectionTitleContainer>
         {!isMobile && (
           <Stepper activeStep={activeStep}>
             {steps.map((step) => {
