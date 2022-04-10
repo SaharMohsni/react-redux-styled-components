@@ -1,14 +1,5 @@
 import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectAlcoholicTypesList,
-  selectCategoriesList,
-  selectCocktailFiltersData,
-  selectGlassesList,
-  selectIngredientsList,
-  selectUserData,
-} from "../../features/selectors/coktailBar.selectors";
 import CustomizedSteppers from "./stepper/CustomStepper";
 import { SectionContainer } from "../styles/SectionContainer.styled";
 import CocktailOwnerForm from "./cocktailOwnerForm/CocktailOwnerForm";

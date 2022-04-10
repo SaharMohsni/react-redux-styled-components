@@ -4,7 +4,6 @@ import { Card } from "../../styles/Card.styled";
 import { CocktailNameContainer } from "../../styles/cocktailCreationSection/CocktailNameContainer.styled";
 import { OverviewSectionContainer } from "../../styles/cocktailCreationSection/OverviewSectionContainer.styled";
 import { ContainerWithHorizontalContent } from "../../styles/ContainerWithHorizontalContent.styled";
-import { ContainerWithVerticalContent } from "../../styles/ContainerWithVerticalContent.styled";
 
 const OverviewSection = ({ userData, cocktailFiltersData }) => {
   return (
